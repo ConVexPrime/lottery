@@ -30,4 +30,4 @@ while not WINNER:
 		print ('You won!')
 	else:
 		week += 1
-		print('{} {} {}'.format(week, theWinners, qPick))
+		print('{} / {} / {}'.format(week, theWinners, qPick))
