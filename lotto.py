@@ -34,8 +34,9 @@ class Lotto:
 		if theWinners == quickPick:
 			self.winner = True
 			self.week += 1
-			print('{} {} {}'.format(self.week, theWinners, quickPick))
-			print ('You won!')
+			# print('{} {} {} You won!'.format(self.week, theWinners, quickPick))
+			return('You won! {} {} {}'.format(self.week, theWinners, quickPick))
 		else:
 			self.week += 1
-			print('{} {} {}'.format(self.week, theWinners, quickPick))
+			# print('{} {} {}'.format(self.week, theWinners, quickPick))
+			return('Not a winner {} {} {}'.format(self.week, theWinners, quickPick))
