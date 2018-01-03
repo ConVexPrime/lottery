@@ -21,19 +21,21 @@ class Lotto:
 			a.sort()
 		return a
 
-	def checkWinner(self):
-		while not self.winner:
-			theWinners = self.getLottoNumbers()
-			qPick = self.getLottoNumbers()
-			if theWinners == qPick:
-				self.winner = True
-				self.week += 1
-				print('{} {} {}'.format(self.week, theWinners, qPick))
-				print ('You won!')
-			else:
-				self.week += 1
-				print('{} {} {}'.format(self.week, theWinners, qPick))
+	def isWinner(self):
+		if self.winner:
+			return True
+		else:
+			return False
 
-# Hoosier Lottery: ($2 per ticket) / 46 numbers (pick 6)
-l = Lotto(46, 3)
-l.checkWinner()
+	def checkWinner(self):
+		theWinners = self.getLottoNumbers()
+		quickPick = self.getLottoNumbers()
+		
+		if theWinners == quickPick:
+			self.winner = True
+			self.week += 1
+			print('{} {} {}'.format(self.week, theWinners, quickPick))
+			print ('You won!')
+		else:
+			self.week += 1
+			print('{} {} {}'.format(self.week, theWinners, quickPick))
