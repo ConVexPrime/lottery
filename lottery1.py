@@ -1,33 +1,39 @@
-# Hoosier Lottery: ($2 per ticket) / 46 numbers (pick 6) 
 import random
 
-NUM_BALLS = 46
-NUM_BALLS_DRAWN = 6
-WINNER = False
-BALLS = []
-week = 0	
+class Lotto:
+	def __init__(self, numBalls, numBallsDrawn):
+		self.numBalls = numBalls
+		self.numBallsDrawn = numBallsDrawn
+		self.winner = False
+		self.balls = []
+		self.week = 0
 
-for i in range(NUM_BALLS):
-	BALLS.append(i+1)
+		for i in range(self.numBalls):
+			self.balls.append(i+1)
 
-def getLottoNums():
-	a = []
-	for i in range(NUM_BALLS_DRAWN):
-		b = random.choice(BALLS)
-		while b in a:
-			b = random.choice(BALLS)
-		a.append(b)
-		a.sort()
-	return a
+	def getLottoNumbers(self):
+		a = []
+		for i in range(self.numBallsDrawn):
+			b = random.choice(self.balls)
+			while b in a:
+				b = random.choice(self.balls)
+			a.append(b)
+			a.sort()
+		return a
 
-while not WINNER:
-	theWinners = getLottoNums()
-	qPick = getLottoNums()
-	if theWinners == qPick:
-		WINNER = True
-		week += 1
-		print('{} {} {}'.format(week, theWinners, qPick))
-		print ('You won!')
-	else:
-		week += 1
-		print('{} / {} / {}'.format(week, theWinners, qPick))
+	def checkWinner(self):
+		while not self.winner:
+			theWinners = self.getLottoNumbers()
+			qPick = self.getLottoNumbers()
+			if theWinners == qPick:
+				self.winner = True
+				self.week += 1
+				print('{} {} {}'.format(self.week, theWinners, qPick))
+				print ('You won!')
+			else:
+				self.week += 1
+				print('{} {} {}'.format(self.week, theWinners, qPick))
+
+# Hoosier Lottery: ($2 per ticket) / 46 numbers (pick 6)
+l = Lotto(46, 3)
+l.checkWinner()
