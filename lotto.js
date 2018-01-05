@@ -1,12 +1,7 @@
-var winner = false;
-var week = 0;
-
 var ballMachine = {
 	balls: [],
-	// Currently hardcoded variables, need some forms and shit.
-	numBalls: 10,
-	numBallsDrawn: 3,
-	theWinners: [],
+	numBalls: 3,
+	numBallsDrawn: 2,
 	populateBalls: function(numBalls) {
 		for (var i = 0; i < numBalls; i++) {
 			this.balls.push(i+1);
@@ -16,34 +11,45 @@ var ballMachine = {
 		var a = [];
 		var b = [];
 		for (var i = 0; i < numBallsDrawn; i++) {
-			b = this.getRandomBall(self.balls);
+			b = this.getRandomBall(this.balls);
 			while (a.includes(b)) {
-				b = this.getRandomBall(self.balls);
+				b = this.getRandomBall(this.balls);
 			}
 		a.push(b);
 		}
+		a.sort();
 		return a;
 	},
 	getRandomBall: function() {
     return Math.floor(Math.random()*(this.balls.length-1+1))+1;
 	},
-}
+};
 
 var lottoGame = {
-	showBalls: function() {
-		console.log(ballMachine.balls);
-	},
+	theWinners: [],
+	playerNumbers: [],
 
-	checkWinner: function() {
-		// Function to check winning numbers against the players numbers
+	init: function() {
+		ballMachine.balls = [];
+		ballMachine.populateBalls(ballMachine.numBalls);
+		theWinners = ballMachine.drawNumbers(ballMachine.numBallsDrawn);
+		playerNumbers = ballMachine.drawNumbers(ballMachine.numBallsDrawn);
 	},
-
-	numbersDrawn: function() {
-		// Function to get numbers drawn
+	isWinner: function() {
+		for (var i = 0; i < theWinners.length; i++) {
+			if (theWinners[i] != playerNumbers[i]) {
+				return false;
+			}
+		}
+		return true;
 	},
-
-	playersNumbers: function() {
-		// Function to get players numbers
-	},
-}
-
+	displayStuff: function() {
+		this.init();
+		console.log(ballMachine.balls + '\n' + theWinners + ' -- ' + playerNumbers)
+		if (this.isWinner()) {
+			console.log('You won!');
+		}	else {
+			console.log('You lost');
+		}
+	}
+};
